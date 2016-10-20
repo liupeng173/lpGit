@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动态下拉菜单</title>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		  <span>请选择去哪玩：</span>
+		<select id= "mySel">
+			<option value="0">请选择</option>
+		</select>
+		<button id="myBtn">生成</button>
+		
+		<script>
+		var arr =[
+		   '北京',
+		   '上海',
+		   '天津',
+		   '广州',
+		   '深圳',
+		   '郑州'
+		];
+		var mySel = document.getElementById('mySel')
+		var myBtn = document.getElementById('myBtn')
+			
+		myBtn.onclick =function(){
+			var i,len = arr.length;
+			optArr =['<option value="0">请选择</option>'];
+//			alert('khbk');
+			for (i=0; i<len; i++){
+				optArr.push('<option value=" ', (i+1), ' ">', arr[i], '</option>');
+			}
+			console.log(optArr);
+			mySel.innerHTML = optArr.join('');
+		}
+		</script>
+	</body>
+</html>

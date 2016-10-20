@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>倒计时</title>
+		<style>
+		.wp {
+			width: 430px;
+			margin: 0 auto;
+		}
+		.wp input {
+			width: 130px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="wp">
+			<h1 id ="colck">00:00:00</h1>
+				<input id="time" type="text" />
+				<select id='unit' name="" id="">
+					<option value="">请选择</option>
+					<option value="3600">小时</option>
+					<option value="60">分钟</option>
+					<option value="1">秒</option>
+				</select>
+				<button id="starBtn">开始倒计时</button>
+		</div>
+		
+		<script src="js/helper.js">
+			
+		</script>
+		<script>
+			var countDown = function(){
+				var starBtn = document.getElementById('starBtn');
+				var colck = document.getElementById('colck');
+				
+                starBtn.onclick = function(){
+                   var time = document.getElementById('time').value;
+				   var unit = document.getElementById('unit').value;
+				   var totalSeconds;
+				   var h,m,s,d,times;
+				   var timer;
+				    
+				   
+				   if(isNaN (time) || time == ''){
+				      alert('请输入数字');
+				      return;
+				   }
+				   if(unit== 0){
+				   	  alert('请选择一个时间单位')
+				   	  return;
+				   }
+				   
+				   totalSeconds = time * unit;
+				   
+				   function runner(){
+				   	  if (totalSeconds <= 0){
+				   	  	clearInterval(timer);
+				   	  	alert('时间到!');
+//				   	  	return;
+				   	  };
+				   	  if (totalSeconds<=10){
+				   	  	colck.style.color ='red';
+				   	  }
+//				   	  d = Day.floor((totalSeconds /3600)/24);
+//				   	  if (d>24){d>'24'+d};
+				   	  
+				   	  h = Math.floor(totalSeconds /3600);
+				      if (h< 10){h='0'+h};
+				      
+				      m = Math.floor((totalSeconds %3600) /60);
+				      if (m< 10){m='0'+m};
+				      
+				      s = totalSeconds % 60;
+				      if (s< 10){s='0'+s};
+				      
+				      times= (h) + ':' + (m) +':' +(s);
+				      colck.innerHTML = times;
+				      
+				   	  totalSeconds--;
+				      
+				   }
+				   timer =setInterval(runner,1000);
+
+				   
+                }
+			}
+			countDown();
+		</script>
+	</body>
+</html>

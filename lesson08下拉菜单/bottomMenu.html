@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动态下拉菜单</title>
+	</head>
+	<body>
+		<span>十一去哪玩:</span>
+		<select name="" id="mySel">
+			<option value="0">请选择</option>
+		</select>
+		<button id="myBtn">生成</button>
+		
+		<script type="text/javascript">
+			var arr = '北京 上海 广州 深圳 郑州'.split(' '),
+				myBtn = document.getElementById('myBtn'),
+				mySel = document.getElementById('mySel');
+			
+			myBtn.onclick = function() {
+				var i, len = arr.length,
+					optS;
+				
+				optS = '<option value="0">请选择</option>';
+				for(i=0; i<len; i++){
+					optS += '<option value="'+(i+1)+'"> ' + arr[i] + '</option>';
+//					console.log(optS)
+				}
+					mySel.innerHTML = optS;
+				
+				
+			}
+			
+		</script>
+	</body>
+</html>
