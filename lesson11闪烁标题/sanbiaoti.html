@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>闪烁标题</title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		
+		<script>
+			function blinkTitle(){
+				var title =document.title;
+				var i = 0;
+//				           赋值为title,不是document.title
+//				document.title ='abc'
+                setInterval(function(){
+                	if(i % 2==0){
+                	   document.title ='wbc'
+                	}else{
+                	   document.title = title;
+                	}
+                	i++;
+                },500)
+			}
+			blinkTitle();
+		</script>
+	</body>
+</html>

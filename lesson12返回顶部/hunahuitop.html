@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>还回顶部</title>
+		<style>
+		
+			body{
+				height: 2000px;
+			}
+			.top{
+				width: 35px;
+				height: 35px;
+				background-color: red;
+				position: fixed;
+				right: 10px;
+				bottom: 10px;
+				color: #fff;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myTop" class="top">还回顶部</div>
+		
+		
+		
+		<script>
+			var myTop =document.getElementById('myTop');
+			var timer;
+			
+			myTop.onclick = function(){
+				timer = setInterval(function(){
+					document.body.scrollTop -= 100;
+					if(document.body.scrollTop <= 0){
+						clearInterval(timer);
+					}
+//					console.log(8);
+				},10);
+			}
+			
+			window.onscroll = function(){
+				var st =document.body.scrollTop;
+				var h =window.innerHeight;
+				if (st>h){
+					myTop.style.display = 'block'
+				}else{
+					myTop.style.display = 'none'
+				}
+			};
+		</script>
+	</body>
+</html>

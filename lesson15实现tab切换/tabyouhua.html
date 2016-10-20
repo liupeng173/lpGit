@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>tab延迟优化</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul ,li {
+				list-style: none;
+			}
+			.tab {
+				width: 883px;
+				margin: 20px auto;
+				
+			}
+			.tab .tab-body {
+				background-color: red;
+				position: relative;
+				top: -300px;
+				left: 80px;
+
+			}
+			.tab .tab-header li{
+				width: 80px;
+				height: 60px;
+				background-color: blue;
+				text-align: center;
+				line-height: 60px;
+				cursor: pointer;
+			}
+			.tab .tab-header li.on{
+				background-color: red;
+			}
+			
+			.tab .tab-body {
+				height: 300px;
+				overflow: hidden;
+			}
+			.tab .tab-body li {
+				height: 300px;
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="tab">
+			<ul class="tab-header">
+				<li class="on">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+			
+			<ol class="tab-body">
+				<li><img src="img/1.png"/></li>
+				<li><img src="img/a.jpg"/></li>
+				<li><img src="img/b.png"/></li>
+				<li><img src="img/d.png"/></li>
+			</ol>
+		</div>
+		
+		<script src="../wbc3/jQueryv1.11.3.js"></script>
+		<script>
+			$(document).ready(function(){
+				var $tab = $('.tab'),
+					$lis = $tab.find('.tab-header li'),
+					$ols = $tab .find('.tab-body li'),
+					timer;
+				
+				$lis.on('mouseover',function(){
+					var $this = $(this),
+						index = $this.index();
+					
+					timer = setTimeout(function(){
+						$this.addClass('on').siblings('.on').removeClass('on');
+						$ols.eq(index).show().siblings().hide();
+					},300)
+					
+				}).on('mouseout',function(){
+					if (timer){
+						clearTimeout(timer);
+					}
+				})
+			});
+		</script>
+	</body>
+</html>

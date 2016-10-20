@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原生JS实现tab切换</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<style >
+			.tab-wp{
+				width: 300px;
+				background-color: #EEEEEE;
+				margin: 50px auto;
+			}
+			.tab-head{
+				background-color: #FFF;
+			}
+			.tab-wp .tab-head a{
+				float: left;
+				margin-right: 10px;
+				width: 60px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				color: #000;
+			}
+			.tab-wp .tab-head a.one {
+				background-color: blue;
+				color: #fff;
+			}
+			.tab-wp .tab-head:after {
+				content: '';
+				display: block;
+				clear: both;
+			}/*清除浮动*/
+			.tab-body div{
+				height: 100px;
+				display: none;
+			}
+			.tab-body div.one{
+				display: block;
+			}
+		</style>
+		
+		<script>
+			var renderTab = function() {
+				var tabHeader = document.getElementById('tabHeader'),
+					tabBody = document.getElementById('tabBody'),
+					tabAs = tabHeader.getElementsByTagName('a');
+					tabDivs = tabBody.getElementsByTagName('div')
+
+					len =tabAs.length;
+					
+				for(var i=0; i<len; i++) {
+					tabAs[i].setAttribute('index',i)
+					tabAs[i].onclick = function(){
+						var currIndex = this.getAttribute('index');
+//						alert(currIndex);
+						for(var j=0; j<len; j++){
+							tabAs[j].className = '';
+							tabDivs[j].className ='';
+//							tabDivs[j].style.display ='none'
+						}
+						this.className = 'one';
+						tabDivs[currIndex].className ='one';
+					}
+				}
+			};
+			window.onload = renderTab;
+		</script>
+	</head>
+	<body>
+		<div class="tab-wp">
+			<div id="tabHeader" class="tab-head">
+				<a class="one" href="javascript:;">HTML</a>
+				<a href="javascript:;">CSS</a>
+				<a href="javascript:;">JS</a>
+				<a href="javascript:;">JQuery</a>
+			</div>
+			<div class="tab-body"id="tabBody">
+				<div class="one">为什么学习 html?</div>
+				<div> 为什么学习 css?</div>
+				<div> 为什么学习 js?</div>
+				<div> 为什么学习 jQ?</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
