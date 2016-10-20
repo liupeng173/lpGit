@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>复选框的全选或取消</title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<th><input id="all" type="checkbox"></th>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>电话</th>
+			</tr>
+			<tr>
+				<th><input  name="chk" type="checkbox"></th>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<th><input  name="chk" type="checkbox"></th>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<th><input  name="chk" type="checkbox"></th>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<th><input  name="chk" type="checkbox"></th>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+			<tr>
+				<th><input  name="chk" type="checkbox"></th>
+				<td>123</td>
+				<td>123</td>
+				<td>123</td>
+			</tr>
+		</table>
+		
+		<script>
+			function initCheckBox() {
+			var all = document.getElementById('all'),
+				chks = document.getElementsByName('chk'),
+				len = chks.length,
+				j,
+				k;
+					//全选按钮点击时
+				all.onclick = function(){
+					var i,status = '',bgColor ='';
+//					this.checked && (status ='checked');
+					if(this.checked){
+					   status ='checked';
+					   bgColor ='yellow';
+					}else{
+					   status ='';
+					   bgColor ='#fff';
+					}
+					//
+					for (i=0; i<len; i++){
+						chks[i].checked = status;
+						chks[i].parentNode.parentNode.style.backgroundColor = bgColor;
+					}
+				}
+				
+				for(j=0; j<len; j++){
+						//每个选框点击事件
+					chks[j].onclick = function(){
+						if (this.checked){
+							this.parentNode.parentNode.style.backgroundColor ='yellow';
+						}else{
+							this.parentNode.parentNode.style.backgroundColor ='#fff';
+						}
+						//如果所有的被选中，all就选中。否则就不选中
+						if (isCheckedAll()){
+							all.checked ='checked';
+						}else{
+							all.checked ='';
+						}
+					}
+				}
+				function isCheckedAll(){
+					for (k=0; k<len; k++){
+						if(!chks[k].checked){
+							return false;
+						}
+					}
+					return true;
+				}
+				
+		}
+            initCheckBox();
+		</script>
+	</body>
+</html>

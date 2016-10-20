@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人爱好</title>
+		<style>
+			.more {
+				margin: 10px 0 0 80px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wp">
+			<div class="orgin">
+				<lable>个人爱好：<input id="orginIpt" type="text" /></lable>
+				<button id="addBut">增加</button>
+			</div>
+			<div id="moreWp"  class="more"></div>
+			<div class="more">
+				<button id="submitBtn">确定</button>
+			</div>
+			<div id="result" class="more"></div>
+		</div>
+		
+		<script>
+			var orginIpt = document.getElementById('orginIpt'),
+				addBut = document.getElementById('addBut'),
+				moreWp = document.getElementById('moreWp'),
+				submitBtn = document.getElementById('submitBtn'),
+				result = document.getElementById('result');
+				
+				//确定时执行函数
+				submitBtn.onclick = function(){
+					var ipts = document.getElementsByTagName('input'),
+						rArr = [],  //?
+						len = ipts.length;
+						
+					for(var i=0; i<len; i++) {
+						rArr.push(ipts[i].value);
+					}
+					result.innerHTML = '你的爱好有:' + rArr.join('-');
+				};
+				//增加时执行函数
+				addBut.onclick = function(){
+					var newElements = getMoreElements(),
+						len = getTotalCount();
+						
+					moreWp.appendChild(newElements);
+				
+					if (len >= 3){
+						addBut.disabled = 'disabled';
+						return;
+					}
+				};
+				function getMoreElements() {
+									//创建元素
+					var p = document.createElement('p'),
+						input = document.createElement('input'),
+						button = document.createElement('button'),
+						delTxt = document.createTextNode('删除'),
+						nbsp = document.createTextNode('\r\n');
+						
+					input.type = 'text';
+					button.appendChild(delTxt);
+					button.onclick = onDelBtnClick;
+					
+						//追加创建的元素
+					p.appendChild(input);
+					p.appendChild(nbsp);//必须在框和按钮之间
+					p.appendChild(button);
+					
+					return p;
+				}
+				
+				function getTotalCount() {
+					return moreWp.getElementsByTagName('p').length;
+				}
+				//删除执行函数
+				function onDelBtnClick(){
+					var r = confirm('确定要删除吗？');
+					
+					 if (r) {
+						moreWp.removeChild(this.parentNode);
+						addBut.disabled = '';
+					 }
+				}
+		</script>
+	</body>
+</html>
