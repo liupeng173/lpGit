@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>兼容所有浏览器的placeholder</title>
+		<style type="text/css">
+			.pl-wp {
+				position: relative;
+			}
+			.pl {
+				position: absolute;
+				left: 4px;
+				top: 2px;
+				color: #ABB1B6;
+				font-size:12px ;
+			}
+		</style>
+	</head>
+	<body>
+		
+	    <input type="radio">
+		<hr>
+	    <input type="text" placeholder="请输入账号">
+	
+	    <hr>
+	
+	    <input id="myTxt" type="text">
+	
+	    <hr>
+	
+	    <input type="text" placeholder="请输入年龄">
+		
+		
+		
+		<script type="text/javascript">
+			function fixplaceholder() {
+				//为了得到input，先创建一个input
+				var input = document.createElement('input');
+				//判断placeholder在不在inpu里面
+				if('placeholder' in input){
+//					return
+				}
+				//否则就不支持  修复
+				fixIt()
+			}
+			
+			function fixIt() {
+				var inps = document.getElementsByTagName('input'),
+					i,len = inps.length;
+					
+				for(i=0; i<len; i++){
+					if(inps[i].type =='text' && inps[i].placeholder){
+						inps[i].outerHTML = '<span class="pl-wp">' + inps[i].outerHTML +'<span class="pl">'+inps[i].placeholder +'</sapn>' +'</span>'
+						
+						inps[i].onkeyup = onIptKeyup;
+					}
+				}
+			}
+			
+			function onIptKeyup() {
+				var val = this.value,
+					pl = this.parentNode.getElementsByTagName('span')[0];
+					
+					if(val == ''){
+						pl.style.display = 'block';
+					}else{
+						pl.style.display = 'none';
+					}
+			}
+			
+			
+			fixplaceholder();
+		</script>
+	</body>
+</html>

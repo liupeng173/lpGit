@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		     input[type="text"]{
+		     	border: 1px solid #a9a9a9;
+		     }
+			.plh-wp{
+				display: inline-block;
+				position: relative;
+			}
+			.plh-wp input{
+				position: relative;
+				background:transparent;
+				z-index: 999999;
+			}
+			.plh-wp span{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				font-size: 13px;
+				color: #a9a9a9;
+				line-height: 22px;
+				text-indent: 2px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" placeholder="请输入账号"/>
+		<hr>
+		<input type="text"  data-plh ="请输入密码"/>
+		<hr>
+		<input type="text"  data-plh ="请输入年龄"/>
+		
+		<script >
+			function fixPlaceholder(){
+				var input =document.getElementsByTagName('input'),
+				    i,len =input.length,
+				    pf,span;
+			    
+			    for(i=0;i<len;i++){
+			    	pf =input[i].getAttribute('data-plh');
+			    	console.log(input[i].type);
+			    	if(input[i].type!='text'||!pf){
+			    		continue;
+			    	}
+                    input[i].outerHTML ='<div class="plh-wp">'+ 
+                    input[i].outerHTML +'<span></span></div>'
+                    
+                    span = input[i].parentNode.getElementsByTagName('span')[0];
+                    span.innerHTML = pf;
+//                  console.log(input[i].parentNode.getElementsByTagName('span')[0]);
+                    input[i].onkeyup = function(){
+//                  	console.log(this.value);
+                    	var val = this.value;
+                    	if(val.length == 0){
+                    		this.parentNode.getElementsByTagName('span')[0].style.display ="block";
+                    	}else{
+                    		this.parentNode.getElementsByTagName('span')[0].style.display ="none";
+                    	}
+                    }
+			    };
+			}
+			
+			fixPlaceholder();
+		</script>
+	</body>
+</html>
